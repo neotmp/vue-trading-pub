@@ -11,6 +11,9 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/history">History</RouterLink>
         <RouterLink to="/performance">Performance</RouterLink>
         <RouterLink to="/risk-assessment">Risk Assessment</RouterLink>
+        <RouterLink to="/brokers">Brokers</RouterLink>
+        <RouterLink to="/accounts">Accounts</RouterLink>
+        <RouterLink to="/positions">Positions</RouterLink>
       </nav>
     </div>
   </header>

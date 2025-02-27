@@ -32,6 +32,66 @@ const router = createRouter({
       name: 'risk-assessment',
       component: () => import('../views/RiskAssessmentView.vue'),
     },
+
+    {
+      path: '/brokers',
+      name: 'brokers',
+      component: () => import('../views/BrokersView.vue'),
+    },
+
+    {
+      path: '/brokers/:id/edit',
+      name: 'brokers-edit',
+      component: () => import('../views/broker/BrokerEdit.vue'),
+    },
+
+    {
+      path: '/brokers/add',
+      name: 'brokers-add',
+      component: () => import('../views/broker/BrokerAdd.vue'),
+    },
+
+    {
+      path: '/accounts',
+      name: 'accounts',
+      component: () => import('../views/AccountsView.vue'),
+    },
+
+    {
+      path: '/accounts/:id/edit',
+      name: 'accounts-edit',
+      component: () => import('../views/account/AccountEdit.vue'),
+    },
+
+    {
+      path: '/accounts/:id/detail',
+      name: 'accounts-detail',
+      component: () => import('../views/account/AccountDetail.vue'),
+    },
+
+    {
+      path: '/accounts/:id/analytics',
+      name: 'accounts-analytics',
+      component: () => import('../views/account/AccountAnalytics.vue'),
+    },
+
+    {
+      path: '/accounts/add',
+      name: 'accounts-add',
+      component: () => import('../views/account/AccountAdd.vue'),
+    },
+
+    {
+      path: '/positions',
+      name: 'positions',
+      component: () => import('../views/PositionsView.vue'),
+    },
+
+    {
+      path: '/balance',
+      name: 'balance',
+      component: () => import('../views/BalanceView.vue'),
+    },
   ],
 })
 
