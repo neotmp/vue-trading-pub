@@ -1,6 +1,8 @@
-# fx-risk
+# vue trading-pub
 
-This template should help get you started developing with Vue 3 in Vite.
+WORK IN PROGRESS
+
+You can follow its development in project
 
 ## Recommended IDE Setup
 
