@@ -9,7 +9,7 @@ import { accountState } from '@/store/account/accountState'
  * @returns account object TAccount found in the slice or undefined.
  */
 export const getAccount = (id: number) =>
-  computed((): TAccount | undefined => {
-    const { accountsList } = accountState()
-    return accountsList.value?.find((element) => element.id === id)
-  })
+	computed((): TAccount | undefined => {
+		const { accountsList } = accountState()
+		return accountsList.value?.find((element) => element.id === id)
+	})

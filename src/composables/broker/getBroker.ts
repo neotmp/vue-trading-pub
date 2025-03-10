@@ -10,8 +10,6 @@ const { data } = store()
  * @returns broker object TBroker found in the slice or undefined.
  */
 export const getBroker = (id: number) =>
-  computed((): TBroker | undefined => {
-    //const accounts = ref<TAccount[] | undefined>(data.value?.accounts)
-
-    return data.value?.brokers.find((element) => element.id === id)
-  })
+	computed((): TBroker | undefined => {
+		return data.value?.brokers.find((element) => element.id === id)
+	})

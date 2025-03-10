@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>Create Broker</div>
+	<div>Sim Table</div>
 </template>
