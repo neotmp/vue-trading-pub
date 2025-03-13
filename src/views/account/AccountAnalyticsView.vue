@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import GaugeProgressComponent from '@/components/GaugeProgressComponent.vue'
 import AccountAnalytics from '@/components/account/AccountAnalytics.vue'
-import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+import BreadcrumbsComponent from '@/components/elements/BreadcrumbsComponent.vue'
 </script>
 
 <template>

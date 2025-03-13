@@ -1,6 +1,8 @@
 import { useAccount } from './account/useAccount'
 import { useBroker } from './broker/useBroker'
 import { useOrder } from './order/useOrder'
+import { usePosition } from './position/usePosition'
+import { useTransaction } from './transaction/useTransaction'
 import { useState } from './useState'
 
 export function store() {
@@ -21,6 +23,8 @@ export function store() {
 		// methods
 		useBroker,
 		useAccount,
-		useOrder
+		useOrder,
+		usePosition,
+		useTransaction
 	}
 }

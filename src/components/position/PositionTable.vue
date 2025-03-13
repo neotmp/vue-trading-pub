@@ -1,9 +1,20 @@
 <script setup lang="ts">
+import { onBeforeMount } from 'vue'
+import { store } from '@/store/store'
 //import { ref } from 'vue'
 
 import EditIcon from '../icons/EditIcon.vue'
-import TrashbinIcon from '../icons/TrashbinIcon.vue'
+//import TrashbinIcon from '../icons/TrashbinIcon.vue'
+//import DocIcon from '../icons/DocIcon.vue'
 import PiechartIcon from '../icons/PiechartIcon.vue'
+//import CheckOutIcon from '../icons/CheckOutIcon.vue'
+import CloseIcon from '../icons/CloseIcon.vue'
+import { getOrderDirection } from '@/composables/order/getOrderDirection'
+//import { getOrderStatus } from '@/composables/order/getOrderStatus'
+//import { getOrderType } from '@/composables/order/getOrderType'
+
+const { usePosition, data, useBroker } = store()
+const { positionsList } = usePosition()
 
 // const sort = ref(false)
 // const active = ref(false)
@@ -11,7 +22,22 @@ import PiechartIcon from '../icons/PiechartIcon.vue'
 // const hidden = ref(false)
 // const serchTerm = ref('')
 
-const link = '#'
+// When dealing with async you need to use then() approach
+onBeforeMount(() => {
+	if (data.value) {
+		usePosition().list().get()
+	} else {
+		useBroker()
+			.brokerList()
+			.fetch()
+			.then(() => {
+				usePosition().list().get()
+			})
+			.finally(() => {
+				console.log('data finally')
+			})
+	}
+})
 </script>
 
 <template>
@@ -31,7 +57,7 @@ const link = '#'
 
 		<div class="flex items-center mt-4 gap-x-3">
 			<RouterLink
-				to="/accounts/add"
+				to="/positions/create"
 				class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600"
 			>
 				<svg
@@ -57,6 +83,7 @@ const link = '#'
 	<div class="flex flex-col mt-6">
 		<div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
 			<div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+				<!-- <div>DATA: {{ positionsList }}</div> -->
 				<div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
 					<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
 						<thead class="bg-gray-50 dark:bg-gray-800">
@@ -194,10 +221,10 @@ const link = '#'
 						</thead>
 
 						<tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-							<tr>
+							<tr v-for="item in positionsList" :key="item.id">
 								<td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
 									<div>
-										<h2 class="font-medium text-gray-800 dark:text-white">2024-02-10</h2>
+										<h2 class="font-medium text-gray-800 dark:text-white">{{ item.timestamp }}</h2>
 										<!-- <p class="text-sm font-normal text-gray-600 dark:text-gray-400">
                       something hee
                     </p> -->
@@ -208,85 +235,87 @@ const link = '#'
 									<div
 										class="inline px-3 py-1 text-sm font-normal text-gray-500 bg-gray-100 rounded-full dark:text-gray-400 gap-x-2 dark:bg-gray-800"
 									>
-										EURUSD
+										{{ item.pair }}
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">0.01</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.volume }}</h4>
 										<!-- <p class="text-gray-500 dark:text-gray-400">{{ account.name }}</p> -->
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
-									<div class="flex items-center">BUY</div>
+									<div class="flex items-center">
+										{{ getOrderDirection(Number(item.direction)) }}
+									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">1.04234</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.price }}</h4>
 										<!-- <p class="text-gray-500 dark:text-gray-400">data</p> -->
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">1.04234</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.sl }}</h4>
 										<!-- <p class="text-gray-500 dark:text-gray-400">data</p> -->
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">1.04234</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.ts }}</h4>
 										<!-- <p class="text-gray-500 dark:text-gray-400">data</p> -->
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">1.04234</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.tp }}</h4>
 										<!-- <p class="text-gray-500 dark:text-gray-400">data</p> -->
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">5.12</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.profit }}</h4>
 										<!-- <p class="text-gray-500 dark:text-gray-400">data</p> -->
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">0.23%</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.change }}</h4>
 										<!-- <p class="text-gray-500 dark:text-gray-400">data</p> -->
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">0.00</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.commission }}</h4>
 										<!-- <p class="text-gray-500 dark:text-gray-400">data</p> -->
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">5.00</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.margin }}</h4>
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">-2.40</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.swap }}</h4>
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">My memo</h4>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.memo }}</h4>
 									</div>
 								</td>
 
@@ -297,13 +326,18 @@ const link = '#'
 								</td> -->
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap space-x-1 flex justify-end">
-									<RouterLink :to="`/accounts/${link}/edit`" class="py-4"><EditIcon /></RouterLink>
-									<div class="py-4"><TrashbinIcon /></div>
-									<RouterLink :to="`/accounts/${link}/detail`" class="py-4"
+									<RouterLink :to="`/positions/close/${item.id}`" class="py-4"
+										><CloseIcon
+									/></RouterLink>
+									<RouterLink :to="`/positions/edit/${item.id}`" class="py-4"
+										><EditIcon
+									/></RouterLink>
+
+									<RouterLink :to="`/positions/detail/${item.id}`" class="py-4"
 										><PiechartIcon
 									/></RouterLink>
 									<button
-										@click="console.log('I was clicked', link)"
+										@click="console.log('I was clicked', item.id)"
 										class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100"
 									>
 										<svg

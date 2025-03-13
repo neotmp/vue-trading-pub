@@ -28,6 +28,28 @@ onUnmounted(() => {
 	payload.value = {}
 })
 // TO DO fix all select types of input
+
+const contracts = [
+	{ id: 1, name: 'Pro' },
+	{ id: 2, name: 'Other contract' }
+]
+
+const currencies = [
+	{ id: 1, name: 'USD' },
+	{ id: 2, name: 'EUR' },
+	{ id: 3, name: 'NZD' }
+]
+
+const types = [
+	{ id: 1, name: 'Trade' },
+	{ id: 2, name: 'Transit' },
+	{ id: 0, name: 'Cash' }
+]
+
+// const directions = [
+// 	{ id: 1, name: 'Buy' },
+// 	{ id: 2, name: 'Sell' }
+// ]
 </script>
 
 <template>
@@ -85,7 +107,7 @@ onUnmounted(() => {
 
 				<div class="sm:col-span-2">
 					<label for="contractId" class="block text-sm/6 font-medium text-gray-900"
-						>ContractId???</label
+						>ContractId</label
 					>
 					<div class="mt-2">
 						<select
@@ -94,7 +116,7 @@ onUnmounted(() => {
 							class="block bg-white h-9 w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
 						>
 							<option
-								v-for="item in data?.brokers"
+								v-for="item in contracts"
 								:key="item.id"
 								:value="item.id"
 								class="dark:bg-dark-2"
@@ -106,9 +128,7 @@ onUnmounted(() => {
 				</div>
 
 				<div class="sm:col-span-2">
-					<label for="currencyId" class="block text-sm/6 font-medium text-gray-900"
-						>Currency???</label
-					>
+					<label for="currencyId" class="block text-sm/6 font-medium text-gray-900">Currency</label>
 					<div class="mt-2">
 						<select
 							v-model="payload.currencyId"
@@ -116,7 +136,7 @@ onUnmounted(() => {
 							class="block bg-white h-9 w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
 						>
 							<option
-								v-for="item in data?.brokers"
+								v-for="item in currencies"
 								:key="item.id"
 								:value="item.id"
 								class="dark:bg-dark-2"
@@ -128,19 +148,14 @@ onUnmounted(() => {
 				</div>
 
 				<div class="sm:col-span-2">
-					<label for="type" class="block text-sm/6 font-medium text-gray-900">Type???</label>
+					<label for="type" class="block text-sm/6 font-medium text-gray-900">Account Type</label>
 					<div class="mt-2">
 						<select
 							v-model="payload.type"
 							id="type"
 							class="block bg-white h-9 w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
 						>
-							<option
-								v-for="item in data?.brokers"
-								:key="item.id"
-								:value="item.id"
-								class="dark:bg-dark-2"
-							>
+							<option v-for="item in types" :key="item.id" :value="item.id" class="dark:bg-dark-2">
 								{{ item.name }}
 							</option>
 						</select>

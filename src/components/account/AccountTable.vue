@@ -51,8 +51,8 @@ function accountType(num: number): string | undefined {
 <template>
 	<!-- <button @click="getMeSomething" class="bg-green-400 p-2 rounded-md">FUNC</button> -->
 	<!-- <div>Search term: {{ serchTerm }}</div> -->
-	<!-- <div>Accounts: {{ accountsList }}</div>
-  <div>Data: {{ data?.brokers.length }}</div> -->
+	<!-- <div>Accounts: {{ accountsList }}</div> -->
+	<div>Brokers: {{ data?.brokers.length }}</div>
 	<div class="sm:flex sm:items-center sm:justify-between">
 		<div>
 			<div class="flex items-center gap-x-3">
@@ -109,7 +109,7 @@ function accountType(num: number): string | undefined {
 				class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
 				:class="`${active ? 'bg-gray-100' : 'bg-white'}`"
 			>
-				ACTIVE
+				TRADE
 			</button>
 
 			<button
@@ -117,7 +117,15 @@ function accountType(num: number): string | undefined {
 				class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
 				:class="`${closed ? 'bg-gray-100' : 'bg-white'}`"
 			>
-				CLOSED
+				CASH
+			</button>
+
+			<button
+				@click="[(closed = !closed), (active = false)]"
+				class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+				:class="`${closed ? 'bg-gray-100' : 'bg-white'}`"
+			>
+				TRANSIT
 			</button>
 		</div>
 
@@ -242,11 +250,11 @@ function accountType(num: number): string | undefined {
 						</thead>
 
 						<tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-							<tr v-for="account in accountsList" :key="account.id">
+							<tr v-for="item in accountsList" :key="item.id">
 								<td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
 									<div>
 										<h2 class="font-medium text-gray-800 dark:text-white">
-											{{ account.name }}
+											{{ item.name }}
 										</h2>
 										<p class="text-sm font-normal text-gray-600 dark:text-gray-400">
 											something hee
@@ -258,34 +266,34 @@ function accountType(num: number): string | undefined {
 									<div
 										class="inline px-3 py-1 text-sm font-normal text-gray-500 bg-gray-100 rounded-full dark:text-gray-400 gap-x-2 dark:bg-gray-800"
 									>
-										{{ account.active ? 'Active' : 'Archived' }}
+										{{ item.active ? 'Active' : 'Archived' }}
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
 										<h4 class="text-gray-700 dark:text-gray-200">
-											{{ accountType(account.type) }}
+											{{ accountType(item.type) }}
 										</h4>
-										<!-- <p class="text-gray-500 dark:text-gray-400">{{ account.name }}</p> -->
+										<!-- <p class="text-gray-500 dark:text-gray-400">{{ item.name }}</p> -->
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
-									<div class="flex items-center">{{ account.broker }}</div>
+									<div class="flex items-center">{{ item.broker }}</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">123,656.00</h4>
-										<p class="text-gray-500 dark:text-gray-400">{{ account.currency }}</p>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.balance }}</h4>
+										<p class="text-gray-500 dark:text-gray-400">{{ item.currency }}</p>
 									</div>
 								</td>
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap">
 									<div>
-										<h4 class="text-gray-700 dark:text-gray-200">13,656.00</h4>
-										<p class="text-gray-500 dark:text-gray-400">{{ account.currency }}</p>
+										<h4 class="text-gray-700 dark:text-gray-200">{{ item.profit }}</h4>
+										<p class="text-gray-500 dark:text-gray-400">{{ item.currency }}</p>
 									</div>
 								</td>
 
@@ -296,18 +304,18 @@ function accountType(num: number): string | undefined {
 								</td> -->
 
 								<td class="px-4 py-4 text-sm whitespace-nowrap space-x-1 flex justify-end">
-									<RouterLink :to="`/accounts/edit/${account.id}`" class="py-4"
+									<RouterLink :to="`/accounts/edit/${item.id}`" class="py-4"
 										><EditIcon
 									/></RouterLink>
 									<div class="py-4"><TrashbinIcon /></div>
-									<RouterLink :to="`/accounts/detail/${account.id}`" class="py-4"
+									<RouterLink :to="`/accounts/detail/${item.id}`" class="py-4"
 										><DocIcon
 									/></RouterLink>
-									<RouterLink :to="`/accounts/analytics/${account.id}`" class="py-4"
+									<RouterLink :to="`/accounts/analytics/${item.id}`" class="py-4"
 										><PiechartIcon
 									/></RouterLink>
 									<button
-										@click="console.log('I was clicked', account.id)"
+										@click="console.log('I was clicked', item.id)"
 										class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100"
 									>
 										<svg

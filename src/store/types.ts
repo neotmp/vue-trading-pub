@@ -27,6 +27,7 @@ export type TBroker = {
 	accounts: TAccount[] | null
 	orders: TOrder[] | null
 	positions: TPosition[] | null
+	transactions: TTransaction[] | null
 }
 
 export type TOrder = {
@@ -37,6 +38,7 @@ export type TOrder = {
 	volume: number
 	pair: string
 	timestamp: Date
+	timestamp_tmp: Date
 	price: number
 	sl: number
 	ts: number
@@ -69,13 +71,7 @@ export type TPosition = {
 	change: number
 	commission: number
 	margin: number
-	pipSize: number
-	spreadPips: number
-	spreadPerLot: number
-	swapShortPips: number
-	swapLongPips: number
-	base: string
-	quote: string
+	swap: number
 	direction: number
 }
 
@@ -103,4 +99,21 @@ export type TAccount = {
 	currency: string
 	profit: number
 	name: string
+	change: string
+}
+
+export type TTransaction = {
+	id: number
+	timestamp: Date
+	brokerId: number
+	accountId: number
+	debitId: number
+	creditId: number
+	currencyId: number
+	direction: number
+	amount: number
+	memo: string
+	status: number
+	external: boolean
+	fee: number
 }

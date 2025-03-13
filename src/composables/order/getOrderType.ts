@@ -10,7 +10,7 @@ export function getOrderType(num: number): string | undefined {
 			return 'Market'
 		case 2:
 			return 'Conditional'
-		case 2:
+		case 0:
 			return 'Modify'
 		default:
 			return undefined

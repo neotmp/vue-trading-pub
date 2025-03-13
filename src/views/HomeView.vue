@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onBeforeMount } from 'vue'
 import { store } from '@/store/store'
-import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+import BreadcrumbsComponent from '@/components/elements/BreadcrumbsComponent.vue'
 
 const { useBroker, data } = store()
 const { brokerList } = useBroker()

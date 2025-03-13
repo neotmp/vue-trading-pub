@@ -16,8 +16,6 @@ export function getOrdersList(): TOrder[] {
 				data.value.brokers[i].orders?.forEach((element) => {
 					ordersList.push(element)
 				})
-			} else {
-				break
 			}
 		}
 	}

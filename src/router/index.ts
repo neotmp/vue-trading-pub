@@ -117,7 +117,7 @@ const router = createRouter({
 			meta: {
 				protected: true,
 				authorized: true,
-				bc: 23
+				bc: 22
 			}
 		},
 
@@ -128,7 +128,7 @@ const router = createRouter({
 			meta: {
 				protected: true,
 				authorized: true,
-				bc: 24
+				bc: 23
 			}
 		},
 
@@ -139,7 +139,7 @@ const router = createRouter({
 			meta: {
 				protected: true,
 				authorized: true,
-				bc: 25
+				bc: 24
 			}
 		},
 
@@ -195,6 +195,72 @@ const router = createRouter({
 				protected: true,
 				authorized: true,
 				bc: 4
+			}
+		},
+
+		{
+			path: '/positions/create',
+			name: 'positions-create',
+			component: () => import('../views/position/PositionCreateView.vue'),
+			meta: {
+				protected: true,
+				authorized: true,
+				bc: 41
+			}
+		},
+
+		{
+			path: '/positions/edit/:id',
+			name: 'positions-edit',
+			component: () => import('../views/position/PositionModifyView.vue'),
+			meta: {
+				protected: true,
+				authorized: true,
+				bc: 42
+			}
+		},
+
+		{
+			path: '/positions/detail/:id',
+			name: 'positions-detail',
+			component: () => import('../views/position/PositionDetailView.vue'),
+			meta: {
+				protected: true,
+				authorized: true,
+				bc: 43
+			}
+		},
+
+		{
+			path: '/positions/close/:id',
+			name: 'positions-close',
+			component: () => import('../views/position/PositionCloseView.vue'),
+			meta: {
+				protected: true,
+				authorized: true,
+				bc: 44
+			}
+		},
+
+		{
+			path: '/transactions',
+			name: 'transactions',
+			component: () => import('../views/TransactionsView.vue'),
+			meta: {
+				protected: true,
+				authorized: true,
+				bc: 5
+			}
+		},
+
+		{
+			path: '/transactions/transfer',
+			name: 'transfer',
+			component: () => import('../views/transaction/TransferView.vue'),
+			meta: {
+				protected: true,
+				authorized: true,
+				bc: 51
 			}
 		},
 

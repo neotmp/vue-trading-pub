@@ -4,11 +4,14 @@ import { ref } from 'vue'
 // state of account
 const accountData = ref<TAccount>()
 const accountsList = ref<TAccount[]>()
+const t = new Date()
 const payload = ref<Partial<TAccount>>({
-	id: 0,
 	name: '',
-	leverage: 400,
+	leverage: 200,
+	openedAt: t,
 	active: true,
+	type: 0,
+	contractId: 1,
 	hedge: true, // ????
 	memo: '' //change
 })

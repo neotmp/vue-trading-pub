@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import OrderTable from '@/components/order/OrderTable.vue'
-import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+import BreadcrumbsComponent from '@/components/elements/BreadcrumbsComponent.vue'
 </script>
 
 <template>

@@ -2,7 +2,7 @@
 import { onBeforeMount, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import LockClosed from '@/components/icons/LockClosed.vue'
-import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+import BreadcrumbsComponent from '@/components/elements/BreadcrumbsComponent.vue'
 //
 import { store } from '@/store/store'
 const { data, useBroker } = store()
